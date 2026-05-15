@@ -1,0 +1,42 @@
+---
+import { APP_STATUS } from "../config";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Features from "../components/Features.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import Pricing from "../components/Pricing.astro";
+import FAQ from "../components/FAQ.astro";
+import CTABand from "../components/CTABand.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const mode = APP_STATUS === "live" ? "download" : "waitlist";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cardsense — The OS for Your Wallet</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Nav mode={mode} />
+    <main>
+      <Hero mode={mode} />
+      <Features />
+      <HowItWorks />
+      <Pricing />
+      <FAQ />
+      <CTABand mode={mode} />
+    </main>
+    <Footer />
+  </body>
+</html>

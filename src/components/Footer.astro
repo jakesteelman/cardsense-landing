@@ -1,0 +1,66 @@
+---
+import Logo from "./Logo.astro";
+
+const columns = [
+  ["Product", ["Features", "Pricing", "Changelog", "Roadmap"]],
+  ["Company", ["About", "Contact"]],
+  ["Legal", ["Privacy", "Terms", "Security"]],
+] as const;
+---
+
+<footer class="relative mx-auto max-w-5xl px-6 py-10">
+  <div
+    class="flex justify-between items-start flex-wrap gap-10 px-2 pt-10 pb-8 border-t border-line"
+  >
+    <!-- Brand -->
+    <div class="max-w-[320px]">
+      <div class="flex items-center gap-2.5">
+        <Logo size={26} />
+        <span class="text-[18px] font-semibold tracking-[-0.015em]"
+          >Cardsense</span
+        >
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="flex flex-wrap gap-14 text-[14px] text-ink-65">
+      {
+        columns.map(([heading, items]) => (
+          <div class="flex flex-col gap-2">
+            <div class="font-semibold text-ink mb-0.5 tracking-[-0.005em]">
+              {heading}
+            </div>
+            {items.map((item) => (
+              <a href="#" class="text-inherit no-underline">
+                {item}
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div
+    class="flex flex-col items-start justify-center md:flex-row md:items-center md:justify-between gap-2 px-2 pt-4 border-t border-line text-[13px] text-ink-50 tracking-[-0.005em]"
+  >
+    <div class="">
+      © {new Date().getFullYear()} Cardsense
+    </div>
+    <div class="flex flex-row items-end justify-center">
+      {
+        columns
+          .find(([heading]) => heading === "Legal")![1]
+          .map((item) => (
+            <a
+              href="#"
+              class="text-inherit no-underline text-[13px] text-ink-50 tracking-[-0.005em] px-2"
+            >
+              {item}
+            </a>
+          ))
+      }
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,72 @@
+---
+import Phone from './Phone.astro';
+import EmailForm from './EmailForm';
+interface Props { mode: 'waitlist' | 'download' }
+const { mode } = Astro.props;
+const isWaitlist = mode === 'waitlist';
+---
+<section id="download" class="relative mx-auto max-w-5xl px-6 pt-[60px] pb-20">
+  <div class="relative overflow-hidden rounded-band bg-ink shadow-[0_30px_60px_rgba(0,0,0,0.15)] px-[60px] py-[72px]">
+    <!-- Subtle top gradient sheen -->
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 pointer-events-none"
+      style="background:linear-gradient(180deg,rgba(255,255,255,0.04),transparent 40%)"
+    ></div>
+
+    <div class="relative z-10" style="display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:center">
+      <!-- Copy + action -->
+      <div>
+        <div class="text-[14px] text-white/55 font-medium tracking-[-0.005em] mb-3.5">
+          {isWaitlist ? 'Early access.' : 'Download.'}
+        </div>
+        <h2
+          class="font-tight font-semibold tracking-[-0.035em] leading-[0.98] m-0 text-white"
+          style="font-size:clamp(40px,5vw,64px)"
+        >
+          Get back what<br />you paid for.
+        </h2>
+        <p class="text-[17px] text-white/65 tracking-[-0.005em] mt-5 mb-8 max-w-[440px] leading-[1.5]">
+          {isWaitlist
+            ? "Leave your email and we'll let you know the day Cardsense ships. That's it."
+            : 'Free for two cards. iPhone for now.'}
+        </p>
+
+        {isWaitlist ? (
+          <EmailForm
+            client:load
+            dark={true}
+            size="lg"
+            placeholder="you@email.com"
+            btn="Join waitlist"
+            style={{ maxWidth: 440 }}
+          />
+        ) : (
+          <div class="flex items-center gap-3.5 flex-wrap">
+            <!-- App Store badge -->
+            <a
+              href="#"
+              class="inline-flex items-center gap-2.5 no-underline h-[54px] px-[18px] bg-white text-ink rounded-xl shadow-[0_4px_14px_rgba(0,0,0,0.08)]"
+            >
+              <svg width={27} height={27} viewBox="0 0 24 24" fill="var(--ink)">
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
+              <div class="text-left leading-[1.1]">
+                <div class="text-[10px] opacity-75 tracking-[0.02em]">Download on the</div>
+                <div class="text-[19px] font-semibold tracking-[-0.01em]">App Store</div>
+              </div>
+            </a>
+            <div class="inline-flex items-center h-[54px] px-[18px] rounded-xl border border-white/16 text-white/85 text-[13.5px] font-medium tracking-[-0.005em]">
+              Early Access · v0.9
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- Phone -->
+      <div class="flex justify-center">
+        <Phone h={400} />
+      </div>
+    </div>
+  </div>
+</section>

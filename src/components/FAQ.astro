@@ -1,0 +1,55 @@
+---
+const faqs = [
+  {
+    q: 'Do you connect to my bank account?',
+    a: 'No. You add cards by name from a list of supported issuers. Cardsense never sees your balances, transactions, or any bank data.',
+    open: true,
+  },
+  {
+    q: 'Which cards are supported?',
+    a: 'Most major US issuers — Amex, Chase, Capital One, Citi, Bilt, and others. You can request a card from inside the app and we\'ll add it.',
+  },
+  {
+    q: "What about credits I've already used this year?",
+    a: "When you add a card, mark anything you've already used. Cardsense picks up from there for the rest of the cycle.",
+  },
+  {
+    q: 'Is the map view private?',
+    a: 'Yes. Your location stays on your phone. Nothing is sent to a server.',
+  },
+  {
+    q: 'Is there an Android version?',
+    a: 'Not yet. iPhone first, Android on the roadmap.',
+  },
+] as const;
+---
+<section id="faq" class="relative mx-auto max-w-[760px] px-6 pt-[60px] pb-[100px]">
+  <div class="text-center mb-14">
+    <h2
+      class="font-tight font-semibold tracking-[-0.035em] leading-[1.02] m-0 text-ink"
+      style="font-size:clamp(36px,4.5vw,56px)"
+    >
+      Questions.
+    </h2>
+  </div>
+
+  <div class="card px-7 py-2">
+    {faqs.map(({ q, a, open }) => (
+      <details class="faq-item border-b border-line" open={open}>
+        <summary>
+          <div class="flex items-center justify-between w-full py-5 px-1">
+            <span class="text-[16.5px] font-medium text-ink tracking-[-0.015em]">{q}</span>
+            <div class="faq-chevron flex items-center justify-center shrink-0 w-[26px] h-[26px] rounded-full text-ink-60 ml-4">
+              <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </div>
+          </div>
+        </summary>
+        <div class="faq-body">
+          <p class="text-[15px] text-ink-65 leading-[1.6] m-0 pb-5 pr-[50px] tracking-[-0.005em]">{a}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

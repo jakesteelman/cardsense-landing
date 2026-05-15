@@ -1,0 +1,80 @@
+---
+const tiers = [
+  {
+    name: 'Free',
+    price: '$0',
+    period: '',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    features: [
+      'Up to 2 cards',
+      'Lorem ipsum dolor sit amet',
+      'Consectetur adipiscing elit',
+      'Sed do eiusmod tempor',
+    ],
+    featured: false,
+    cta: 'Get started',
+  },
+  {
+    name: 'Pro',
+    price: '$4',
+    period: '/ month',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+    features: [
+      'Unlimited cards',
+      'Best card nearby (map)',
+      'Lorem ipsum dolor sit amet',
+      'Consectetur adipiscing elit',
+      'Sed do eiusmod tempor incididunt',
+    ],
+    featured: true,
+    cta: 'Start Pro',
+  },
+] as const;
+---
+<section id="pricing" class="relative mx-auto max-w-[920px] px-6 pt-[60px] pb-[100px]">
+  <div class="text-center mb-14">
+    <h2
+      class="font-tight font-semibold tracking-[-0.035em] leading-[1.02] m-0 text-ink"
+      style="font-size:clamp(36px,4.5vw,56px)"
+    >
+      Pricing.
+    </h2>
+    <p class="text-[17px] text-ink-65 mt-4 tracking-[-0.005em] max-w-[540px] mx-auto leading-[1.5]">
+      Free for two cards. A few dollars a month for the rest.
+    </p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    {tiers.map(({ name, price, period, desc, features, featured, cta }) => (
+      <div class={`${featured ? 'card-featured' : 'card'} flex flex-col relative p-9`}>
+        {featured && (
+          <div class="absolute top-4 right-4 px-[11px] py-1 rounded-full bg-ink text-white text-[11.5px] font-semibold">
+            Popular
+          </div>
+        )}
+        <div class="text-[15px] font-semibold text-ink-65 tracking-[-0.005em]">{name}</div>
+        <div class="flex items-baseline gap-1 mt-2 mb-1.5">
+          <span class="text-[56px] font-semibold tracking-[-0.045em] leading-none text-ink tabular-nums">{price}</span>
+          {period && <span class="text-[17px] text-ink-60 tracking-[-0.01em]">{period}</span>}
+        </div>
+        <p class="text-[14px] text-ink-65 m-0 mb-6 tracking-[-0.005em] leading-[1.55]">{desc}</p>
+        <ul class="list-none p-0 m-0 flex flex-col gap-2.5 flex-1">
+          {features.map((f) => (
+            <li class="flex items-center gap-2.5 text-[14.5px] text-ink-80 tracking-[-0.005em]">
+              <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12l5 5L20 7" />
+              </svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <a
+          href="#download"
+          class={`no-underline inline-flex items-center justify-center gap-1.5 rounded-full font-semibold mt-7 px-5 py-3 text-[14.5px] tracking-[-0.005em] ${featured ? 'bg-ink text-white border-0' : 'bg-transparent text-ink border border-line'}`}
+        >
+          {cta}
+        </a>
+      </div>
+    ))}
+  </div>
+</section>

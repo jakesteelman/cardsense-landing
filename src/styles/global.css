@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg:        #f6f6f3;
+    --bg-2:      #ffffff;
+    --bg-3:      #efefe9;
+    --ink:       #0a0a0a;
+    --ink-2:     #1a1a1a;
+    --ink-80:    rgba(10,10,10,0.85);
+    --ink-70:    rgba(10,10,10,0.7);
+    --ink-65:    rgba(10,10,10,0.6);
+    --ink-60:    rgba(10,10,10,0.55);
+    --ink-50:    rgba(10,10,10,0.42);
+    --ink-40:    rgba(10,10,10,0.32);
+    --line:      rgba(10,10,10,0.08);
+    --line-2:    rgba(10,10,10,0.05);
+    --accent:        #2563EB;
+    --accent-soft:   rgba(37,99,235,0.08);
+    --glass-bg:      rgba(255,255,255,0.65);
+    --glass-border:  rgba(255,255,255,0.7);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Inter Tight', 'Inter', -apple-system, sans-serif;
+    font-weight: 700;
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: rgba(59,130,246,0.25); }
+}
+
+@layer components {
+  /* Floating glass pill — nav only */
+  .glass-pill {
+    background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.58));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(255,255,255,0.4),
+      0 1px 1px rgba(15,30,80,0.04),
+      0 8px 28px rgba(15,30,80,0.08);
+  }
+
+  /* Quiet surface card */
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow:
+      0 1px 2px rgba(10,10,10,0.03),
+      0 8px 20px rgba(10,10,10,0.03);
+  }
+
+  /* Dashed "coming soon" card */
+  .card-soft {
+    background: transparent;
+    border: 1px dashed rgba(10,10,10,0.18);
+    border-radius: 22px;
+    box-shadow: none;
+  }
+
+  /* Prominent card (featured pricing) */
+  .card-featured {
+    background: var(--bg-2);
+    border: 1px solid rgba(10,10,10,0.85);
+    border-radius: 22px;
+    box-shadow:
+      0 1px 2px rgba(10,10,10,0.05),
+      0 14px 32px rgba(10,10,10,0.08);
+  }
+
+  /* Outlined pill badge/tag */
+  .tag {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(10,10,10,0.03);
+  }
+
+  /* Secondary outlined button */
+  .btn-outline {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .btn-outline:hover {
+    background: var(--bg-3);
+    box-shadow: 0 4px 14px rgba(10,10,10,0.06);
+  }
+
+  /* FAQ details/summary reset */
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item .faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-item[open] .faq-body {
+    max-height: 300px;
+  }
+
+  .faq-chevron {
+    transition: transform 0.25s ease;
+  }
+  .faq-item[open] .faq-chevron {
+    transform: rotate(45deg);
+  }
+}

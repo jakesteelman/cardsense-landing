@@ -1,0 +1,75 @@
+---
+import PhonePeek from "./PhonePeek.astro";
+
+const tiles = [
+  {
+    title: "Pick the right card at the right store.",
+    body: "See nearby places and the card in your wallet that earns the most there. No more guessing at the register.",
+  },
+  {
+    title: "Is the fee worth it?",
+    body: "Cardsense keeps a running tally of your redeemed credits versus annual fees, so you know which cards are pulling their weight.",
+  },
+  {
+    title: "Don't leave money on the table.",
+    body: "Get notified before any unused credits expire, so you actually have time to do something about it.",
+  },
+  {
+    title: "Loop in authorized users.",
+    body: "Add your spouse, partner, or anyone else on your card and track their redemptions alongside yours.",
+  },
+] as const;
+---
+
+<section id="features" class="relative mx-auto max-w-5xl px-6 pt-[120px] pb-20">
+  <!-- Section intro -->
+  <div class="text-center mb-14">
+    <h2
+      class="font-tight font-semibold tracking-[-0.035em] leading-[1.02] m-0 text-ink"
+      style="font-size:clamp(36px,4.5vw,56px)"
+    >
+      What Cardsense does.
+    </h2>
+    <p
+      class="text-[17px] text-ink-65 mt-5 mb-0 leading-[1.55] tracking-[-0.005em] max-w-[520px] mx-auto"
+    >
+      Your cards come with dozens of credits — each tracked in a different app,
+      resetting on a different schedule. Cardsense puts it all in one place.
+    </p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <!-- Featured bento: 2-col, big heading + body + phone -->
+    <div
+      class="card grid grid-cols-2 flex-col md:flex-row overflow-hidden"
+      style="grid-column: 1 / -1"
+    >
+      <div class="p-10 flex flex-col justify-center md:flex-1">
+        <p class="text-xl font-medium tracking-tight leading-[1.4] m-0 max-w-[420px]">
+          <span class="text-ink">All your credits, in one place. </span>
+          <span class="text-ink-60">Tracking credits across every card is harder than it should be. Cardsense keeps track — reminders before they reset, a log of what you've redeemed — so you never leave value on the table.</span>
+        </p>
+      </div>
+      <div class="flex-shrink-0 flex justify-center items-end md:pt-8 md:pr-8">
+        <PhonePeek big={true} />
+      </div>
+    </div>
+
+    <!-- Regular tiles -->
+    {
+      tiles.map(({ title, body }) => (
+        <div class="card flex flex-col justify-between overflow-hidden gap-12">
+          <div class="px-8 pt-8">
+            <p class="text-lg font-medium tracking-tight leading-[1.4] m-0">
+              <span class="text-ink">{title} </span>
+              <span class="text-ink-60">{body}</span>
+            </p>
+          </div>
+          <div class="flex justify-center">
+            <PhonePeek big={false} />
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

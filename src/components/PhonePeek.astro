@@ -1,0 +1,37 @@
+---
+interface Props { big?: boolean; visibleH?: number }
+const { big = false, visibleH: visibleHProp } = Astro.props;
+const phoneH  = big ? 720 : 540;
+const visibleH = visibleHProp ?? (big ? 460 : 300);
+const w = phoneH * 0.495;
+const br = phoneH * 0.075;
+const innerBr = phoneH * 0.06;
+const diW = w * 0.30;
+---
+<div style={`position:relative;width:${w}px;height:${visibleH}px;overflow:hidden;`}>
+  <div style={`
+    position:absolute;top:0;
+    width:${w}px;height:${phoneH}px;
+    border-radius:${br}px;
+    background:linear-gradient(155deg,#2a2a2e 0%,#0b0b0d 38%,#18181b 70%,#0b0b0d 100%);
+    padding:7px;box-sizing:border-box;
+    box-shadow:0 24px 50px -12px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.12),0 0 0 0.5px rgba(255,255,255,0.06);
+  `}>
+    <div style={`
+      width:100%;height:100%;border-radius:${innerBr}px;
+      background:#020203;position:relative;overflow:hidden;
+    `}>
+      <!-- Dynamic Island -->
+      <div style={`
+        position:absolute;top:12px;left:50%;transform:translateX(-50%);
+        width:${diW}px;height:26px;background:#000;border-radius:20px;
+      `}></div>
+      <!-- Faint sheen -->
+      <div style="
+        position:absolute;inset:0;
+        background:linear-gradient(155deg,rgba(255,255,255,0.03) 0%,transparent 35%);
+        pointer-events:none;
+      "></div>
+    </div>
+  </div>
+</div>
