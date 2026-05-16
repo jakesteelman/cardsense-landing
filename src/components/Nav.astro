@@ -10,6 +10,8 @@ const links = [
   ['Pricing', '/#pricing'],
   ['FAQ', '/#faq'],
 ] as const;
+
+const ctaLabel = isWaitlist ? 'Join waitlist' : 'Download';
 ---
 <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-max max-w-[calc(100vw-32px)]">
   <div class="glass-pill flex items-center gap-1 rounded-full py-2 pl-[18px] pr-2">
@@ -21,7 +23,7 @@ const links = [
       <span>Cardsense</span>
     </a>
 
-    <div class="flex items-center gap-0.5 text-[14px] text-zinc-500">
+    <div class="hidden md:flex items-center gap-0.5 text-[14px] text-zinc-500">
       {links.map(([label, href]) => (
         <a
           href={href}
@@ -34,14 +36,138 @@ const links = [
 
     <a
       href="/#download"
-      class="inline-flex items-center gap-1.5 rounded-full no-underline font-semibold whitespace-nowrap ml-2 px-4 py-2 bg-zinc-950 text-white text-[14px]"
+      class="hidden md:inline-flex items-center gap-1.5 rounded-full no-underline font-semibold whitespace-nowrap ml-2 px-4 py-2 bg-zinc-950 text-white text-[14px]"
     >
-      {isWaitlist ? 'Join waitlist' : 'Download'}
+      {ctaLabel}
     </a>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="nav-toggle md:hidden inline-flex items-center justify-center ml-1 h-9 w-9 rounded-full text-zinc-950 transition-[background] duration-150 hover:bg-[rgba(10,10,10,0.05)]"
+    >
+      <span class="hamburger" aria-hidden="true">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+      </span>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="mobile-menu glass-pill md:hidden absolute top-[calc(100%+8px)] left-1/2 w-[min(280px,calc(100vw-32px))] rounded-3xl p-2"
+  >
+    <div class="flex flex-col">
+      {links.map(([label, href], i) => (
+        <a
+          href={href}
+          style={`--i:${i}`}
+          class="mobile-link rounded-2xl no-underline px-4 py-3 text-[15px] font-medium text-zinc-700 transition-[background] duration-150 hover:bg-[rgba(10,10,10,0.05)]"
+        >
+          {label}
+        </a>
+      ))}
+      <a
+        href="/#download"
+        style={`--i:${links.length}`}
+        class="mobile-link mt-2 inline-flex items-center justify-center rounded-2xl no-underline font-semibold px-4 py-3 bg-zinc-950 text-white text-[15px]"
+      >
+        {ctaLabel}
+      </a>
+    </div>
   </div>
 </nav>
 
+<style>
+  /* Animated hamburger -> X */
+  .hamburger {
+    position: relative;
+    width: 18px;
+    height: 14px;
+  }
+  .bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.75px;
+    border-radius: 2px;
+    background: currentColor;
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.2s ease;
+  }
+  .bar-1 { top: 0; }
+  .bar-2 { top: 50%; transform: translateY(-50%); }
+  .bar-3 { bottom: 0; }
+
+  .nav-toggle[aria-expanded='true'] .bar-1 {
+    transform: translateY(6.1px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded='true'] .bar-2 {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(0.4);
+  }
+  .nav-toggle[aria-expanded='true'] .bar-3 {
+    transform: translateY(-6.1px) rotate(-45deg);
+  }
+
+  /* Panel open/close */
+  .mobile-menu {
+    transform: translateX(-50%) translateY(-6px) scale(0.96);
+    transform-origin: top center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease-out,
+      visibility 0s linear 0.32s;
+  }
+  .mobile-menu.is-open {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.2s ease-out,
+      visibility 0s linear 0s;
+  }
+
+  /* Staggered link reveal */
+  .mobile-link {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.25s ease-out,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.15s ease;
+  }
+  .mobile-menu.is-open .mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--i) * 0.04s + 0.05s);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar,
+    .mobile-menu,
+    .mobile-link {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
+    .mobile-menu { transform: translateX(-50%); }
+    .mobile-menu.is-open { transform: translateX(-50%); }
+    .mobile-link { transform: none; }
+  }
+</style>
+
 <script>
+  // Desktop link hover
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('mouseenter', () => {
       (link as HTMLElement).style.background = 'rgba(10,10,10,0.05)';
@@ -52,4 +178,41 @@ const links = [
       (link as HTMLElement).style.color = '#71717a';
     });
   });
+
+  // Mobile menu
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  if (toggle && menu) {
+    let open = false;
+
+    const setOpen = (next: boolean) => {
+      open = next;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.classList.toggle('is-open', open);
+    };
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!open);
+    });
+
+    menu.querySelectorAll('.mobile-link').forEach(link =>
+      link.addEventListener('click', () => setOpen(false))
+    );
+
+    document.addEventListener('click', (e) => {
+      if (open && !menu.contains(e.target as Node) && !toggle.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && open) {
+        setOpen(false);
+        (toggle as HTMLElement).focus();
+      }
+    });
+  }
 </script>
