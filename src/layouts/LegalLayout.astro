@@ -1,0 +1,123 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { APP_STATUS } from "../config";
+import "../styles/global.css";
+
+/**
+ * Shared chrome for every /legal/* document.
+ *
+ * Used two ways:
+ *  1. As a Markdown layout — `.md` files set `layout:` in frontmatter and
+ *     this receives `frontmatter` + `headings` automatically. Paste the
+ *     lawyer's markdown into the file body; it renders into <slot />.
+ *  2. As a normal component — the /legal hub passes `frontmatter` props
+ *     and children directly.
+ */
+interface Frontmatter {
+  title?: string;
+  description?: string;
+  lastUpdated?: string;
+}
+interface Props {
+  frontmatter?: Frontmatter;
+}
+
+const { frontmatter = {} } = Astro.props as Props;
+
+const title = frontmatter.title ?? "Legal";
+const description =
+  frontmatter.description ?? "Cardsense legal information and policies.";
+// YAML parses an unquoted `2025-05-16` into a Date; format it to a clean,
+// human label and fall back to the raw value for free-text like "TODO".
+const rawUpdated = frontmatter.lastUpdated;
+let lastUpdated: string | undefined;
+if (rawUpdated != null) {
+  const d = new Date(rawUpdated as string);
+  lastUpdated = isNaN(d.getTime())
+    ? String(rawUpdated)
+    : d.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        timeZone: "UTC",
+      });
+}
+const mode = APP_STATUS === "live" ? "download" : "waitlist";
+
+// On the /legal hub itself there's no parent to point back to, so the
+// breadcrumb is just "Legal" with no second segment.
+const isHub = Astro.url.pathname.replace(/\/$/, "") === "/legal";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Cardsense</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Nav mode={mode} />
+    <main class="mx-auto max-w-[760px] px-6 pt-[140px] pb-[120px]">
+      <!-- Document header -->
+      <header class="mb-12 text-center">
+        <nav
+          aria-label="Breadcrumb"
+          class="flex items-center justify-center gap-2 text-[13.5px] text-ink-50 mb-6"
+        >
+          {
+            isHub ? (
+              <span class="text-ink-65" aria-current="page">
+                Legal
+              </span>
+            ) : (
+              <>
+                <a
+                  href="/legal"
+                  class="no-underline hover:text-ink transition-colors"
+                >
+                  Legal
+                </a>
+                <span aria-hidden="true" class="text-ink-40">
+                  /
+                </span>
+                <span class="text-ink-65" aria-current="page">
+                  {title}
+                </span>
+              </>
+            )
+          }
+        </nav>
+        <h1
+          class="font-tight font-bold tracking-[-0.035em] leading-[1.05] m-0 text-ink"
+          style="font-size:clamp(34px,5vw,52px)"
+        >
+          {title}
+        </h1>
+        {
+          lastUpdated && (
+            <p class="mt-4 text-[14px] text-ink-50 m-0">
+              Last updated{" "}
+              <span class="text-ink-65">{lastUpdated}</span>
+            </p>
+          )
+        }
+      </header>
+
+      <!-- Document body -->
+      <article class="prose prose-cardsense">
+        <slot />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

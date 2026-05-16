@@ -5,16 +5,16 @@ const { mode } = Astro.props;
 const isWaitlist = mode === 'waitlist';
 
 const links = [
-  ['Features', '#features'],
-  ['How it works', '#how'],
-  ['Pricing', '#pricing'],
-  ['FAQ', '#faq'],
+  ['Features', '/#features'],
+  ['How it works', '/#how'],
+  ['Pricing', '/#pricing'],
+  ['FAQ', '/#faq'],
 ] as const;
 ---
 <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-max max-w-[calc(100vw-32px)]">
   <div class="glass-pill flex items-center gap-1 rounded-full py-2 pl-[18px] pr-2">
     <a
-      href="#"
+      href="/"
       class="flex items-center gap-2 no-underline font-semibold mr-2 whitespace-nowrap text-ink text-[16.5px] tracking-[-0.015em]"
     >
       <Logo size={28} appIcon={true} />
@@ -33,7 +33,7 @@ const links = [
     </div>
 
     <a
-      href="#download"
+      href="/#download"
       class="inline-flex items-center gap-1.5 rounded-full no-underline font-semibold whitespace-nowrap ml-2 px-4 py-2 bg-ink text-white text-[14px] tracking-[-0.005em]"
     >
       {isWaitlist ? 'Join waitlist' : 'Download'}

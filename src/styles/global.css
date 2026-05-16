@@ -21,6 +21,7 @@
     --accent-soft:   rgba(37,99,235,0.08);
     --glass-bg:      rgba(255,255,255,0.65);
     --glass-border:  rgba(255,255,255,0.7);
+    --font-tight:    'Inter Tight', 'Inter', -apple-system, sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
