@@ -12,12 +12,12 @@ const isWaitlist = mode === "waitlist";
   class="relative mx-auto text-center max-w-5xl px-6 pt-[140px] pb-[60px]"
 >
   <!-- Chip -->
-  <div
+  <!-- <div
     class="tag inline-flex items-center gap-2 rounded-full px-[14px] py-[6px] text-[13px] text-ink-65 font-medium mb-7 tracking-[-0.005em]"
   >
     <span class="rounded-full w-1.5 h-1.5 bg-accent"></span>
     {isWaitlist ? "Coming to iPhone" : "Now on iPhone"}
-  </div>
+  </div> -->
 
   <!-- Headline -->
   <div class="max-w-xl mx-auto">
@@ -27,7 +27,8 @@ const isWaitlist = mode === "waitlist";
     <p
       class="text-ink-65 text-lg mx-auto mt-7 mb-9 leading-[1.5] tracking-[-0.005em]"
     >
-      Keep track of every credit, perk, and annual fee across all your cards — and always know which card to pull before you tap.
+      Keep track of every credit, perk, and annual fee across all your cards —
+      and always know which card to pull before you tap.
     </p>
     {
       isWaitlist ? (
@@ -76,6 +77,6 @@ const isWaitlist = mode === "waitlist";
 
   <!-- Phone -->
   <div class={`flex justify-center${isWaitlist ? " mt-[50px]" : ""}`}>
-    <Phone h={680} />
+    <Phone h={680} screenshot="/home.png" />
   </div>
 </section>

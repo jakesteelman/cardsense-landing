@@ -1,37 +1,42 @@
 ---
-interface Props { big?: boolean; visibleH?: number }
-const { big = false, visibleH: visibleHProp } = Astro.props;
-const phoneH  = big ? 720 : 540;
+interface Props {
+  big?: boolean;
+  visibleH?: number;
+  screenshot?: string;
+}
+const { big = false, visibleH: visibleHProp, screenshot } = Astro.props;
+
+const aspectRatio = 2760 / 1350;
+const w = big ? 357 : 267;
+const h = Math.round(w * aspectRatio);
 const visibleH = visibleHProp ?? (big ? 460 : 300);
-const w = phoneH * 0.495;
-const br = phoneH * 0.075;
-const innerBr = phoneH * 0.06;
-const diW = w * 0.30;
+const r = Math.round(w * 0.1);
+
+// All insets in px relative to full phone dimensions (h, w)
+const sTop   = Math.round(h * 0.0239);
+const sLeft  = Math.round(w * 0.0541);
+const sRight = Math.round(w * 0.0519);
+// bottom CSS value = visibleH - (full phone height - bottom inset px)
+// will be negative → screenshot extends below clip boundary, overflow:hidden clips it
+const sBottom = visibleH - (h - Math.round(h * 0.0243));
 ---
-<div style={`position:relative;width:${w}px;height:${visibleH}px;overflow:hidden;`}>
-  <div style={`
-    position:absolute;top:0;
-    width:${w}px;height:${phoneH}px;
-    border-radius:${br}px;
-    background:linear-gradient(155deg,#2a2a2e 0%,#0b0b0d 38%,#18181b 70%,#0b0b0d 100%);
-    padding:7px;box-sizing:border-box;
-    box-shadow:0 24px 50px -12px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.12),0 0 0 0.5px rgba(255,255,255,0.06);
-  `}>
-    <div style={`
-      width:100%;height:100%;border-radius:${innerBr}px;
-      background:#020203;position:relative;overflow:hidden;
-    `}>
-      <!-- Dynamic Island -->
-      <div style={`
-        position:absolute;top:12px;left:50%;transform:translateX(-50%);
-        width:${diW}px;height:26px;background:#000;border-radius:20px;
-      `}></div>
-      <!-- Faint sheen -->
-      <div style="
-        position:absolute;inset:0;
-        background:linear-gradient(155deg,rgba(255,255,255,0.03) 0%,transparent 35%);
-        pointer-events:none;
-      "></div>
+<div style={`position:relative;width:${w}px;height:${visibleH}px;overflow:hidden;flex-shrink:0;`}>
+  {screenshot && (
+    <div style={`position:absolute;top:${sTop}px;left:${sLeft}px;right:${sRight}px;bottom:${sBottom}px;clip-path:inset(0 0 0 0 round ${r}px ${r}px 0 0);`}>
+      <img
+        src={screenshot}
+        alt=""
+        aria-hidden="true"
+        style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;"
+      />
     </div>
-  </div>
+  )}
+  <img
+    src="/iphone-17-pro-bezel.png"
+    alt=""
+    aria-hidden="true"
+    width={w}
+    height={h}
+    style={`position:absolute;top:0;left:0;width:${w}px;height:${h}px;display:block;`}
+  />
 </div>

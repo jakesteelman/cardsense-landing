@@ -19,12 +19,28 @@ export default function EmailForm({
 }: Props) {
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.includes('@')) return;
-    setDone(true);
-    setTimeout(() => { setEmail(''); setDone(false); }, 2400);
+    setError('');
+    setLoading(true);
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.status === 429) { setError('Too many attempts. Try again later.'); return; }
+      if (!res.ok) { setError('Something went wrong. Try again.'); return; }
+      setDone(true);
+      setTimeout(() => { setEmail(''); setDone(false); }, 4000);
+    } catch {
+      setError('Something went wrong. Try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const h = size === 'lg' ? 56 : 52;
@@ -32,7 +48,7 @@ export default function EmailForm({
   const btnH = h - padR * 2;
 
   return (
-    <form onSubmit={onSubmit} style={style} className={className}>
+    <form onSubmit={onSubmit} style={style} className={className} noValidate>
       <div style={{
         position: 'relative',
         display: 'flex',
@@ -67,7 +83,7 @@ export default function EmailForm({
         />
         <button
           type="submit"
-          disabled={done}
+          disabled={done || loading}
           style={{
             position: 'absolute',
             right: padR,
@@ -97,7 +113,7 @@ export default function EmailForm({
               </svg>
               You're in
             </>
-          ) : (
+          ) : loading ? 'Joining…' : (
             <>
               {btn}
               <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -107,6 +123,11 @@ export default function EmailForm({
           )}
         </button>
       </div>
+      {error && (
+        <p style={{ marginTop: 8, fontSize: 13, color: dark ? 'rgba(255,100,100,0.9)' : '#c0392b', paddingLeft: 4 }}>
+          {error}
+        </p>
+      )}
     </form>
   );
 }

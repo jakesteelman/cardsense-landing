@@ -1,66 +1,114 @@
 ---
+import EmailForm from "./EmailForm";
 import Logo from "./Logo.astro";
 
-const columns = [
-  ["Product", ["Features", "Pricing", "Changelog", "Roadmap"]],
-  ["Company", ["About", "Contact"]],
-  ["Legal", ["Privacy", "Terms", "Security"]],
-] as const;
+const links = {
+  product: {
+    title: "Product",
+    items: [
+      { name: "Features", href: "#features" },
+      { name: "Pricing", href: "#pricing" },
+      { name: "Changelog", href: "#" },
+      { name: "Roadmap", href: "#" },
+    ],
+  },
+  company: {
+    title: "Company",
+    items: [
+      { name: "About", href: "#" },
+      { name: "Contact", href: "#" },
+    ],
+  },
+  legal: {
+    title: "Legal",
+    items: [
+      { name: "Privacy", href: "#" },
+      { name: "Terms", href: "#" },
+      { name: "Security", href: "#" },
+    ],
+  },
+};
 ---
 
-<footer class="relative mx-auto max-w-5xl px-6 py-10">
-  <div
-    class="flex justify-between items-start flex-wrap gap-10 px-2 pt-10 pb-8 border-t border-line"
-  >
-    <!-- Brand -->
-    <div class="max-w-[320px]">
-      <div class="flex items-center gap-2.5">
-        <Logo size={26} />
-        <span class="text-[18px] font-semibold tracking-[-0.015em]"
-          >Cardsense</span
-        >
-      </div>
+<footer class="p-4">
+  <div class="relative rounded-3xl bg-zinc-950 overflow-hidden">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 top-0 h-[800px]"
+      style="background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(255,255,255,0.10),transparent)"
+    >
     </div>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-5xl px-8 py-24 text-center space-y-10">
+      <h2
+        class="font-tight font-medium tracking-tight leading-[1.1] m-0 text-zinc-100"
+        style="font-size:clamp(40px,5vw,64px)"
+      >
+        Get the max value<br />from your cards.
+      </h2>
+      <div class="flex justify-center">
+        <EmailForm
+          client:load
+          dark={true}
+          size="lg"
+          placeholder="you@email.com"
+          btn="Join waitlist"
+          style={{ width: "100%", maxWidth: 520 }}
+        />
+      </div>
+    </section>
 
     <!-- Links -->
-    <div class="flex flex-wrap gap-14 text-[14px] text-ink-65">
-      {
-        columns.map(([heading, items]) => (
-          <div class="flex flex-col gap-2">
-            <div class="font-semibold text-ink mb-0.5 tracking-[-0.005em]">
-              {heading}
-            </div>
-            {items.map((item) => (
-              <a href="#" class="text-inherit no-underline">
-                {item}
-              </a>
-            ))}
+    <div class="mx-auto max-w-5xl px-8 pt-8 pb-10 border-t border-zinc-800">
+      <div class="flex justify-between items-start flex-wrap gap-10 pb-8">
+        <!-- Brand -->
+        <div class="flex flex-col items-start gap-2.5">
+          <div class="text-white">
+            <Logo size={32} appIcon={true} appIconColor="fill-zinc-900" />
           </div>
-        ))
-      }
-    </div>
-  </div>
+          <span class="text-zinc-50 text-base font-medium">Cardsense</span>
+        </div>
 
-  <!-- Copyright -->
-  <div
-    class="flex flex-col items-start justify-center md:flex-row md:items-center md:justify-between gap-2 px-2 pt-4 border-t border-line text-[13px] text-ink-50 tracking-[-0.005em]"
-  >
-    <div class="">
-      © {new Date().getFullYear()} Cardsense
-    </div>
-    <div class="flex flex-row items-end justify-center">
-      {
-        columns
-          .find(([heading]) => heading === "Legal")![1]
-          .map((item) => (
-            <a
-              href="#"
-              class="text-inherit no-underline text-[13px] text-ink-50 tracking-[-0.005em] px-2"
-            >
-              {item}
-            </a>
-          ))
-      }
+        <!-- Nav columns -->
+        <div class="flex flex-wrap gap-14 text-sm text-zinc-400">
+          {
+            Object.values(links)
+              .filter((g) => g.title !== "Legal")
+              .map((group) => (
+                <div class="flex flex-col gap-2">
+                  <div class="font-semibold text-zinc-300 mb-0.5 tracking-[-0.005em]">
+                    {group.title}
+                  </div>
+                  {group.items.map((item) => (
+                    <a href={item.href} class="text-inherit no-underline">
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              ))
+          }
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div
+        class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between pt-6 border-t border-zinc-800 text-sm text-zinc-500"
+      >
+        <div>© {new Date().getFullYear()} Cardsense</div>
+        <div class="flex items-center">
+          {
+            links.legal.items.map((item) => (
+              <a
+                href={item.href}
+                class="text-inherit no-underline px-2 last:pr-0"
+              >
+                {item.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </footer>

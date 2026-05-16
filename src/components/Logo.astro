@@ -1,10 +1,47 @@
 ---
-interface Props { size?: number }
-const { size = 28 } = Astro.props;
+interface Props {
+  size?: number;
+  appIcon?: boolean;
+  /** What color to make the logomark when the app icon currentColor is changed. */
+  appIconColor?: string;
+}
+const { size = 28, appIcon = false, appIconColor = "fill-white" } = Astro.props;
 ---
-<svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-  <rect x="3" y="7" width="26" height="18" rx="4" fill="var(--ink)" />
-  <rect x="6.5" y="11" width="6" height="3.5" rx="0.8" fill="rgba(255,255,255,0.85)" />
-  <rect x="6.5" y="17" width="11" height="1.5" rx="0.75" fill="rgba(255,255,255,0.4)" />
-  <circle cx="24" cy="11" r="2" fill="var(--accent)" />
-</svg>
+
+{
+  appIcon ? (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 139 139"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="139" height="139" rx="39" fill="currentColor" />
+      <path
+        d="M104.857 34C106.593 34 108 35.4201 108 37.1718V86.5336C108 88.4325 106.357 89.9058 104.488 89.6834L100.031 89.1518L101.585 65.1101C101.946 59.5354 98.3265 54.4894 92.9659 53.0925L39.6589 39.2021C36.6797 38.4258 37.2366 34.0001 40.3136 34H104.857Z"
+        class={appIconColor ?? "fill-white"}
+      />
+      <path
+        d="M30.7045 39.4675C31.535 42.5913 33.8529 45.333 37.8245 46.368L91.1321 60.2584C93.0813 60.7663 94.3974 62.601 94.2665 64.6281L91.5252 107.044C91.3523 109.717 88.7907 111.557 86.231 110.847L33.1804 96.1207C30.0994 95.2654 28.0223 92.3638 28.1855 89.1437L30.7045 39.4675Z"
+        class={appIconColor ?? "fill-white"}
+      />
+    </svg>
+  ) : (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 88 84"
+      fill="none"
+      aria-hidden="true"
+    >
+      <g fill="currentColor">
+        <>
+          <path d="m84.365 0c1.9101 0 3.4585 1.54841 3.4585 3.45845v53.82255c-.0002 2.0704-1.8072 3.6769-3.8635 3.4344l-4.9038-.5796 1.7097-26.2143c.3964-6.0786-3.5854-11.5805-9.4833-13.1037l-58.6494-15.14561c-3.27786-.84647-2.66509-5.67212044.7203-5.67219z" />
+          <path d="m2.7813 5.96161c.9138 3.40601 3.46398 6.39549 7.8336 7.52409l58.6501 15.1456c2.1446.5539 3.5926 2.5543 3.4486 4.7646l-3.016 46.249c-.1903 2.9147-3.0086 4.9207-5.8249 4.1462l-58.36734-16.0567c-3.38976-.9326-5.675049-4.0963-5.49548199-7.6074z" />
+        </>
+      </g>
+    </svg>
+  )
+}

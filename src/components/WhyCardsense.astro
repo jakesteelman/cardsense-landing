@@ -1,0 +1,51 @@
+---
+const items = [
+  {
+    title: "No affiliate networks.",
+    body: "Card recommendations are based entirely on your rewards and spending — not on who pays us. We have no deals with banks or issuers.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/></svg>`,
+  },
+  {
+    title: "Your data is yours.",
+    body: "We don't sell, broker, or share your card details or spending habits. What you put in Cardsense stays in Cardsense.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  },
+  {
+    title: "No tracking pixels.",
+    body: "No ad networks, no cross-site trackers, no fingerprinting. We collect only what's necessary to make the app work.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/><line x1="2" y1="2" x2="22" y2="22"/></svg>`,
+  },
+  {
+    title: "Built for users, not banks.",
+    body: "Cardsense is independently built and answers only to the people who use it. No investor pressure to monetize your data.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+  },
+] as const;
+---
+
+<section class="relative mx-auto max-w-5xl px-6 pt-[80px] pb-4">
+  <div class="text-center mb-10">
+    <h2
+      class="font-tight font-semibold tracking-[-0.035em] leading-[1.02] m-0 text-ink"
+      style="font-size:clamp(30px,3.8vw,46px)"
+    >
+      Private, by default.
+    </h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    {items.map(({ title, body, icon }) => (
+      <div class="card flex flex-col gap-5 p-8">
+        <div
+          class="flex items-center justify-center rounded-2xl text-ink-65"
+          style="width:48px;height:48px;background:var(--bg-3,rgba(10,10,10,0.05));flex-shrink:0;"
+          set:html={icon}
+        />
+        <p class="text-[15.5px] leading-[1.5] tracking-[-0.005em] m-0">
+          <span class="font-semibold text-ink">{title} </span>
+          <span class="text-ink-60">{body}</span>
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

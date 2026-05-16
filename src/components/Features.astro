@@ -5,18 +5,22 @@ const tiles = [
   {
     title: "Pick the right card at the right store.",
     body: "See nearby places and the card in your wallet that earns the most there. No more guessing at the register.",
+    screenshot: "/best-card-by-category.png",
   },
   {
     title: "Is the fee worth it?",
     body: "Cardsense keeps a running tally of your redeemed credits versus annual fees, so you know which cards are pulling their weight.",
+    screenshot: "/home.png",
   },
   {
     title: "Don't leave money on the table.",
     body: "Get notified before any unused credits expire, so you actually have time to do something about it.",
+    screenshot: "/notification.png",
   },
   {
     title: "Loop in authorized users.",
     body: "Add your spouse, partner, or anyone else on your card and track their redemptions alongside yours.",
+    screenshot: "/home.png",
   },
 ] as const;
 ---
@@ -45,19 +49,25 @@ const tiles = [
       style="grid-column: 1 / -1"
     >
       <div class="p-10 flex flex-col justify-center md:flex-1">
-        <p class="text-xl font-medium tracking-tight leading-[1.4] m-0 max-w-[420px]">
+        <p
+          class="text-xl font-medium tracking-tight leading-[1.4] m-0 max-w-[420px]"
+        >
           <span class="text-ink">All your credits, in one place. </span>
-          <span class="text-ink-60">Tracking credits across every card is harder than it should be. Cardsense keeps track — reminders before they reset, a log of what you've redeemed — so you never leave value on the table.</span>
+          <span class="text-ink-60"
+            >Tracking credits across every card is harder than it should be.
+            Cardsense keeps track — reminders before they reset, a log of what
+            you've redeemed — so you never leave value on the table.</span
+          >
         </p>
       </div>
       <div class="flex-shrink-0 flex justify-center items-end md:pt-8 md:pr-8">
-        <PhonePeek big={true} />
+        <PhonePeek big={true} screenshot="/credits.png" />
       </div>
     </div>
 
     <!-- Regular tiles -->
     {
-      tiles.map(({ title, body }) => (
+      tiles.map(({ title, body, screenshot }) => (
         <div class="card flex flex-col justify-between overflow-hidden gap-12">
           <div class="px-8 pt-8">
             <p class="text-lg font-medium tracking-tight leading-[1.4] m-0">
@@ -66,7 +76,7 @@ const tiles = [
             </p>
           </div>
           <div class="flex justify-center">
-            <PhonePeek big={false} />
+            <PhonePeek big={true} screenshot={screenshot} />
           </div>
         </div>
       ))

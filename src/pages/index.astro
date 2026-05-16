@@ -3,6 +3,7 @@ import { APP_STATUS } from "../config";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import Features from "../components/Features.astro";
+import WhyCardsense from "../components/WhyCardsense.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import Pricing from "../components/Pricing.astro";
 import FAQ from "../components/FAQ.astro";
@@ -19,7 +20,7 @@ const mode = APP_STATUS === "live" ? "download" : "waitlist";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cardsense — The OS for Your Wallet</title>
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,10 +33,10 @@ const mode = APP_STATUS === "live" ? "download" : "waitlist";
     <main>
       <Hero mode={mode} />
       <Features />
+      <WhyCardsense />
       <HowItWorks />
       <Pricing />
       <FAQ />
-      <CTABand mode={mode} />
     </main>
     <Footer />
   </body>
