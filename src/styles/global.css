@@ -22,7 +22,7 @@
     padding: 0;
     background: var(--bg);
     color: #09090b;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -38,7 +38,7 @@
   /* Display face: Inter pinned to its 32pt optical size. Apply to
      headings >= 2em; smaller headings stay on regular `font-sans`. */
   .font-display {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-optical-sizing: none;
     font-variation-settings: 'opsz' 32;
   }

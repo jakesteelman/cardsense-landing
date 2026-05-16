@@ -8,6 +8,7 @@ import HowItWorks from "../components/HowItWorks.astro";
 import Pricing from "../components/Pricing.astro";
 import FAQ from "../components/FAQ.astro";
 import Footer from "../components/Footer.astro";
+import "@fontsource-variable/inter/opsz.css";
 import "../styles/global.css";
 
 const mode = APP_STATUS === "live" ? "download" : "waitlist";
@@ -20,12 +21,6 @@ const mode = APP_STATUS === "live" ? "download" : "waitlist";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cardsense — The OS for Your Wallet</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <Nav mode={mode} />
