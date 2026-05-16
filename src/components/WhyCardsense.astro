@@ -26,7 +26,7 @@ const items = [
 <section class="relative mx-auto max-w-5xl px-6 pt-[80px] pb-4">
   <div class="text-center mb-10">
     <h2
-      class="font-tight font-semibold tracking-[-0.035em] leading-[1.02] m-0 text-ink"
+      class="font-display font-semibold leading-[1.02] m-0 text-zinc-950"
       style="font-size:clamp(30px,3.8vw,46px)"
     >
       Private, by default.
@@ -37,13 +37,13 @@ const items = [
     {items.map(({ title, body, icon }) => (
       <div class="card flex flex-col gap-5 p-8">
         <div
-          class="flex items-center justify-center rounded-2xl text-ink-65"
+          class="flex items-center justify-center rounded-2xl text-zinc-500"
           style="width:48px;height:48px;background:var(--bg-3,rgba(10,10,10,0.05));flex-shrink:0;"
           set:html={icon}
         />
-        <p class="text-[15.5px] leading-[1.5] tracking-[-0.005em] m-0">
-          <span class="font-semibold text-ink">{title} </span>
-          <span class="text-ink-60">{body}</span>
+        <p class="text-[15.5px] leading-[1.5] m-0">
+          <span class="font-semibold text-zinc-950">{title} </span>
+          <span class="text-zinc-500">{body}</span>
         </p>
       </div>
     ))}

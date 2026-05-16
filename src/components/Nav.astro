@@ -15,17 +15,17 @@ const links = [
   <div class="glass-pill flex items-center gap-1 rounded-full py-2 pl-[18px] pr-2">
     <a
       href="/"
-      class="flex items-center gap-2 no-underline font-semibold mr-2 whitespace-nowrap text-ink text-[16.5px] tracking-[-0.015em]"
+      class="flex items-center gap-2 no-underline font-semibold mr-2 whitespace-nowrap text-zinc-950 text-[16.5px]"
     >
       <Logo size={28} appIcon={true} />
       <span>Cardsense</span>
     </a>
 
-    <div class="flex items-center gap-0.5 text-[14px] text-ink-65">
+    <div class="flex items-center gap-0.5 text-[14px] text-zinc-500">
       {links.map(([label, href]) => (
         <a
           href={href}
-          class="nav-link rounded-full no-underline whitespace-nowrap px-[13px] py-[7px] text-ink-65 transition-[background,color] duration-150"
+          class="nav-link rounded-full no-underline whitespace-nowrap px-[13px] py-[7px] text-zinc-500 transition-[background,color] duration-150"
         >
           {label}
         </a>
@@ -34,7 +34,7 @@ const links = [
 
     <a
       href="/#download"
-      class="inline-flex items-center gap-1.5 rounded-full no-underline font-semibold whitespace-nowrap ml-2 px-4 py-2 bg-ink text-white text-[14px] tracking-[-0.005em]"
+      class="inline-flex items-center gap-1.5 rounded-full no-underline font-semibold whitespace-nowrap ml-2 px-4 py-2 bg-zinc-950 text-white text-[14px]"
     >
       {isWaitlist ? 'Join waitlist' : 'Download'}
     </a>
@@ -45,11 +45,11 @@ const links = [
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('mouseenter', () => {
       (link as HTMLElement).style.background = 'rgba(10,10,10,0.05)';
-      (link as HTMLElement).style.color = 'var(--ink)';
+      (link as HTMLElement).style.color = '#09090b';
     });
     link.addEventListener('mouseleave', () => {
       (link as HTMLElement).style.background = 'transparent';
-      (link as HTMLElement).style.color = 'var(--ink-65)';
+      (link as HTMLElement).style.color = '#71717a';
     });
   });
 </script>

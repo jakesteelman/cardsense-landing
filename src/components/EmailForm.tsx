@@ -77,8 +77,7 @@ export default function EmailForm({
             outline: 'none',
             fontFamily: 'inherit',
             fontSize: 15.5,
-            letterSpacing: '-0.005em',
-            color: dark ? 'white' : 'var(--ink)',
+            color: dark ? 'white' : '#09090b',
           }}
         />
         <button
@@ -92,12 +91,11 @@ export default function EmailForm({
             padding: '0 18px',
             border: 'none',
             borderRadius: 999,
-            background: dark ? 'white' : 'var(--ink)',
-            color: dark ? 'var(--ink)' : 'white',
+            background: dark ? 'white' : '#09090b',
+            color: dark ? '#09090b' : 'white',
             fontFamily: 'inherit',
             fontSize: 14,
             fontWeight: 600,
-            letterSpacing: '-0.005em',
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',

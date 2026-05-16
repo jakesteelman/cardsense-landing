@@ -61,7 +61,7 @@ const isHub = Astro.url.pathname.replace(/\/$/, "") === "/legal";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -72,25 +72,25 @@ const isHub = Astro.url.pathname.replace(/\/$/, "") === "/legal";
       <header class="mb-12 text-center">
         <nav
           aria-label="Breadcrumb"
-          class="flex items-center justify-center gap-2 text-[13.5px] text-ink-50 mb-6"
+          class="flex items-center justify-center gap-2 text-[13.5px] text-zinc-400 mb-6"
         >
           {
             isHub ? (
-              <span class="text-ink-65" aria-current="page">
+              <span class="text-zinc-500" aria-current="page">
                 Legal
               </span>
             ) : (
               <>
                 <a
                   href="/legal"
-                  class="no-underline hover:text-ink transition-colors"
+                  class="no-underline hover:text-zinc-950 transition-colors"
                 >
                   Legal
                 </a>
-                <span aria-hidden="true" class="text-ink-40">
+                <span aria-hidden="true" class="text-zinc-400">
                   /
                 </span>
-                <span class="text-ink-65" aria-current="page">
+                <span class="text-zinc-500" aria-current="page">
                   {title}
                 </span>
               </>
@@ -98,16 +98,16 @@ const isHub = Astro.url.pathname.replace(/\/$/, "") === "/legal";
           }
         </nav>
         <h1
-          class="font-tight font-bold tracking-[-0.035em] leading-[1.05] m-0 text-ink"
+          class="font-display font-bold leading-[1.05] m-0 text-zinc-950"
           style="font-size:clamp(34px,5vw,52px)"
         >
           {title}
         </h1>
         {
           lastUpdated && (
-            <p class="mt-4 text-[14px] text-ink-50 m-0">
+            <p class="mt-4 text-[14px] text-zinc-400 m-0">
               Last updated{" "}
-              <span class="text-ink-65">{lastUpdated}</span>
+              <span class="text-zinc-500">{lastUpdated}</span>
             </p>
           )
         }

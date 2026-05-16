@@ -23,7 +23,7 @@ const steps = [
 <section id="how" class="relative mx-auto max-w-5xl px-6 pt-[60px] pb-[100px]">
   <div class="text-center mb-14">
     <h2
-      class="font-tight font-semibold tracking-[-0.035em] leading-[1.02] m-0 text-ink"
+      class="font-display font-semibold leading-[1.02] m-0 text-zinc-950"
       style="font-size:clamp(36px,4.5vw,56px)"
     >
       30 seconds to set up.
@@ -34,19 +34,19 @@ const steps = [
     {steps.map(({ n, title, body, icon }) => (
       <div class="card flex flex-col gap-3.5 p-7">
         <div class="flex items-center justify-between">
-          <div class="text-[13px] font-medium text-ink-50 tracking-[-0.005em] tabular-nums">
+          <div class="text-[13px] font-medium text-zinc-400 tabular-nums">
             Step {n}
           </div>
-          <div class="flex items-center justify-center w-9 h-9 rounded-[10px] bg-muted text-ink">
+          <div class="flex items-center justify-center w-9 h-9 rounded-[10px] bg-muted text-zinc-950">
             <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <path d={icon} />
             </svg>
           </div>
         </div>
-        <h3 class="font-tight font-semibold text-[22px] tracking-[-0.025em] leading-[1.15] m-0">
+        <h3 class="font-sans font-semibold text-[22px] leading-[1.15] m-0">
           {title}
         </h3>
-        <p class="text-[15px] text-ink-65 leading-[1.5] m-0 tracking-[-0.005em]">
+        <p class="text-[15px] text-zinc-500 leading-[1.5] m-0">
           {body}
         </p>
       </div>

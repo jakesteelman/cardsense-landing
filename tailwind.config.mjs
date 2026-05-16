@@ -11,19 +11,9 @@ export default {
         muted:   'var(--bg-3)',
         accent:  'var(--accent)',
         line:    'var(--line)',
-        ink: {
-          DEFAULT: 'var(--ink)',
-          80: 'var(--ink-80)',
-          70: 'var(--ink-70)',
-          65: 'var(--ink-65)',
-          60: 'var(--ink-60)',
-          50: 'var(--ink-50)',
-          40: 'var(--ink-40)',
-        },
       },
       fontFamily: {
-        sans:  ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        tight: ['"Inter Tight"', 'Inter', '-apple-system', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       borderRadius: {
         card: '22px',
@@ -38,50 +28,52 @@ export default {
       typography: {
         cardsense: {
           css: {
-            '--tw-prose-body': 'var(--ink-80)',
-            '--tw-prose-headings': 'var(--ink)',
-            '--tw-prose-lead': 'var(--ink-65)',
+            '--tw-prose-body': '#27272a',
+            '--tw-prose-headings': '#09090b',
+            '--tw-prose-lead': '#71717a',
             '--tw-prose-links': 'var(--accent)',
-            '--tw-prose-bold': 'var(--ink)',
-            '--tw-prose-counters': 'var(--ink-50)',
-            '--tw-prose-bullets': 'var(--ink-50)',
+            '--tw-prose-bold': '#09090b',
+            '--tw-prose-counters': '#a1a1aa',
+            '--tw-prose-bullets': '#a1a1aa',
             '--tw-prose-hr': 'var(--line)',
-            '--tw-prose-quotes': 'var(--ink-65)',
+            '--tw-prose-quotes': '#71717a',
             '--tw-prose-quote-borders': 'var(--line)',
-            '--tw-prose-captions': 'var(--ink-50)',
-            '--tw-prose-code': 'var(--ink)',
+            '--tw-prose-captions': '#a1a1aa',
+            '--tw-prose-code': '#09090b',
             '--tw-prose-th-borders': 'var(--line)',
             '--tw-prose-td-borders': 'var(--line)',
 
             maxWidth: 'none',
             fontSize: '16px',
             lineHeight: '1.7',
-            letterSpacing: '-0.005em',
 
+            // Prose h1 renders at ~2.25em (>= 2em) → display (opsz 32).
             h1: {
-              fontFamily: 'var(--font-tight)',
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+              fontVariationSettings: '"opsz" 32',
               fontWeight: '700',
-              letterSpacing: '-0.035em',
               lineHeight: '1.1',
             },
+            // h2–h4 render < 2em → regular Inter (small display looks off).
             h2: {
-              fontFamily: 'var(--font-tight)',
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+              fontVariationSettings: 'normal',
               fontWeight: '700',
               fontSize: '1.4em',
-              letterSpacing: '-0.025em',
               lineHeight: '1.25',
               marginTop: '2.6em',
               scrollMarginTop: '110px',
             },
             h3: {
-              fontFamily: 'var(--font-tight)',
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+              fontVariationSettings: 'normal',
               fontWeight: '600',
               fontSize: '1.1em',
-              letterSpacing: '-0.02em',
               scrollMarginTop: '110px',
             },
             h4: {
-              fontFamily: 'var(--font-tight)',
+              fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+              fontVariationSettings: 'normal',
               fontWeight: '600',
               scrollMarginTop: '110px',
             },
@@ -112,7 +104,7 @@ export default {
             pre: {
               backgroundColor: 'var(--bg-3)',
               border: '1px solid var(--line)',
-              color: 'var(--ink)',
+              color: '#09090b',
               borderRadius: '14px',
             },
             'pre code': {
@@ -126,7 +118,7 @@ export default {
             'thead th': {
               backgroundColor: 'var(--bg-3)',
               fontWeight: '600',
-              color: 'var(--ink)',
+              color: '#09090b',
               padding: '0.65em 0.9em',
             },
             'tbody td': {

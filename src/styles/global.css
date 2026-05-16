@@ -7,21 +7,12 @@
     --bg:        #f6f6f3;
     --bg-2:      #ffffff;
     --bg-3:      #efefe9;
-    --ink:       #0a0a0a;
-    --ink-2:     #1a1a1a;
-    --ink-80:    rgba(10,10,10,0.85);
-    --ink-70:    rgba(10,10,10,0.7);
-    --ink-65:    rgba(10,10,10,0.6);
-    --ink-60:    rgba(10,10,10,0.55);
-    --ink-50:    rgba(10,10,10,0.42);
-    --ink-40:    rgba(10,10,10,0.32);
     --line:      rgba(10,10,10,0.08);
     --line-2:    rgba(10,10,10,0.05);
     --accent:        #2563EB;
     --accent-soft:   rgba(37,99,235,0.08);
     --glass-bg:      rgba(255,255,255,0.65);
     --glass-border:  rgba(255,255,255,0.7);
-    --font-tight:    'Inter Tight', 'Inter', -apple-system, sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -30,8 +21,9 @@
     margin: 0;
     padding: 0;
     background: var(--bg);
-    color: var(--ink);
+    color: #09090b;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -40,8 +32,15 @@
   }
 
   h1, h2, h3 {
-    font-family: 'Inter Tight', 'Inter', -apple-system, sans-serif;
     font-weight: 700;
+  }
+
+  /* Display face: Inter pinned to its 32pt optical size. Apply to
+     headings >= 2em; smaller headings stay on regular `font-sans`. */
+  .font-display {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-optical-sizing: none;
+    font-variation-settings: 'opsz' 32;
   }
 
   a { color: inherit; }
