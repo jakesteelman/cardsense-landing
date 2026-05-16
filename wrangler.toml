@@ -1,8 +1,0 @@
-name = "cardsense-landing"
-pages_build_output_dir = "dist"
-
-[[unsafe.bindings]]
-name = "RATE_LIMITER"
-type = "ratelimit"
-namespace_id = "1001"
-simple = { limit = 5, period = 60 }

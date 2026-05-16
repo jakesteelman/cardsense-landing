@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && wrangler pages functions build --outdir=./dist/_worker.js/ && cp .assetsignore dist/.assetsignore",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -20,6 +20,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "wrangler": "^4.92.0"
   }
 }
